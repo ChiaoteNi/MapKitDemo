@@ -9,138 +9,6 @@ import UIKit
 import MapKit
 import CoreLocation
 
-/*
- public extension UIView {
-
-     // MARK: - Add to targetView
-     @discardableResult
-     func add(to superView: UIView) -> Self {
-         superView.addSubview(self)
-         return self
-     }
-
-     // MARK: - NSLayoutAnchor
-
-     @discardableResult
-     func anchorEqualToSuperView<LayoutType: NSLayoutAnchor<AnchorType>, AnchorType>(
-         _ keyPath: KeyPath<UIView, LayoutType>,
-         constant: CGFloat = 0,
-         multiplier: CGFloat? = nil,
-         priority: UILayoutPriority = .required
-     ) -> Self {
-         if let superview {
-             return anchor(
-                 keyPath, .equal, to: superview[keyPath: keyPath],
-                 constant: constant,
-                 multiplier: multiplier,
-                 priority: priority
-             )
-         }
-         return self
-     }
-
-     @discardableResult
-     func anchor<LayoutType: NSLayoutAnchor<AnchorType>, AnchorType>(
-         _ keyPath: KeyPath<UIView, LayoutType>,
-         _ relation: NSLayoutConstraint.Relation = .equal,
-         to anchor: LayoutType,
-         constant: CGFloat = 0,
-         multiplier: CGFloat? = nil,
-         priority: UILayoutPriority = .required
-     ) -> Self {
-
-         constraint(keyPath, relation, to: anchor, constant: constant, multiplier: multiplier, priority: priority)
-         return self
-     }
-
-     @discardableResult
-     func constraint
-     <LayoutType: NSLayoutAnchor<AnchorType>, AnchorType>(
-         _ keyPath: KeyPath<UIView, LayoutType>,
-         _ relation: NSLayoutConstraint.Relation = .equal,
-         to anchor: LayoutType,
-         constant: CGFloat = 0,
-         multiplier: CGFloat? = nil,
-         priority: UILayoutPriority = .required
-     ) -> NSLayoutConstraint {
-
-         let constraint: NSLayoutConstraint
-
-         if let multiplier = multiplier,
-            let dimension = self[keyPath: keyPath] as? NSLayoutDimension,
-            let anchor = anchor as? NSLayoutDimension {
-
-             switch relation {
-             case .equal:
-                 constraint = dimension.constraint(equalTo: anchor, multiplier: multiplier, constant: constant)
-             case .greaterThanOrEqual:
-                 constraint = dimension.constraint(greaterThanOrEqualTo: anchor, multiplier: multiplier, constant: constant)
-             case .lessThanOrEqual:
-                 constraint = dimension.constraint(lessThanOrEqualTo: anchor, multiplier: multiplier, constant: constant)
-             @unknown default:
-                 constraint = dimension.constraint(equalTo: anchor, multiplier: multiplier, constant: constant)
-             }
-         } else {
-             switch relation {
-             case .equal:
-                 constraint = self[keyPath: keyPath].constraint(equalTo: anchor, constant: constant)
-             case .greaterThanOrEqual:
-                 constraint = self[keyPath: keyPath].constraint(greaterThanOrEqualTo: anchor, constant: constant)
-             case .lessThanOrEqual:
-                 constraint = self[keyPath: keyPath].constraint(lessThanOrEqualTo: anchor, constant: constant)
-             @unknown default:
-                 constraint = self[keyPath: keyPath].constraint(equalTo: anchor, constant: constant)
-             }
-         }
-         translatesAutoresizingMaskIntoConstraints = false
-         constraint.priority = priority
-         constraint.isActive = true
-
-         return constraint
-     }
-
-     // MARK: - NSLayoutDimension
-
-     @discardableResult
-     func anchor(
-         _ anchor: KeyPath<UIView, NSLayoutDimension>,
-         _ relation: NSLayoutConstraint.Relation = .equal,
-         to constant: CGFloat,
-         priority: UILayoutPriority = .required
-     ) -> Self {
-
-         constraint(anchor, relation, to: constant, priority: priority)
-         return self
-     }
-
-     @discardableResult
-     func constraint(
-         _ keyPath: KeyPath<UIView, NSLayoutDimension>,
-         _ relation: NSLayoutConstraint.Relation = .equal,
-         to constant: CGFloat = 0,
-         priority: UILayoutPriority = .required
-     ) -> NSLayoutConstraint {
-
-         let constraint: NSLayoutConstraint
-
-         switch relation {
-         case .equal:
-             constraint = self[keyPath: keyPath].constraint(equalToConstant: constant)
-         case .greaterThanOrEqual:
-             constraint = self[keyPath: keyPath].constraint(greaterThanOrEqualToConstant: constant)
-         case .lessThanOrEqual:
-             constraint = self[keyPath: keyPath].constraint(lessThanOrEqualToConstant: constant)
-         @unknown default:
-             constraint = self[keyPath: keyPath].constraint(equalToConstant: constant)
-         }
-         constraint.priority = priority
-         constraint.isActive = true
-         return constraint
-     }
- }
-
- */
-
 final class ViewController: UIViewController {
 
     enum Mode {
@@ -157,8 +25,16 @@ final class ViewController: UIViewController {
     private var tableViewHeightConstraint: NSLayoutConstraint!
     private var tableViewCellHeight: CGFloat = 44
 
-    private lazy var dataSource: UITableViewDiffableDataSource<Int, MKMapItem>
-    private lazy var dataSourceSnapshot: NSDiffableDataSourceSnapshot<Int, MKMapItem>
+    private lazy var dataSource: UITableViewDiffableDataSource<Int, MKMapItem> = {
+        UITableViewDiffableDataSource<Int, MKMapItem>(tableView: self.tableView) { tableView, indexPath, item in
+            let cell = tableView.getCell(with: SuggestedSearchTermCell.self, for: indexPath)
+            cell.configure(with: item.name ?? "")
+            return cell
+        }
+    }()
+    private lazy var dataSourceSnapshot: NSDiffableDataSourceSnapshot<Int, MKMapItem> = {
+        dataSource.snapshot()
+    }()
 
     // Please help me to implement this ViewController with the following requirement
     // - A searchBar on the top upper the mapView
@@ -199,11 +75,124 @@ final class ViewController: UIViewController {
     private let lookAroundSceneRetriever = SceneRetriever()
     private let routeService = RouteService()
 
+    private var currentMode: Mode = .search {
+        didSet {
+            guard currentMode != oldValue else {
+                return
+            }
+            switch currentMode {
+            case .search:
+                directionButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+                searchBar.isHidden = false
+                mapView.preferredConfiguration = MKHybridMapConfiguration(elevationStyle: .realistic)
+            case .direction:
+                directionButton.setImage(UIImage(systemName: "tram.fill"), for: .normal)
+                searchBar.isHidden = true
+                selectedMapItem = nil
+                displayedMapItems = storedMapItems
+                tableView.isHidden = true
+                mapView.preferredConfiguration = MKStandardMapConfiguration(elevationStyle: .realistic, emphasisStyle: .muted)
+            }
+        }
+    }
+
+    private var displayedMapItems: [MKMapItem] = [] {
+        didSet {
+            guard displayedMapItems != oldValue else {
+                return
+            }
+            tableViewHeightConstraint.constant = CGFloat(displayedMapItems.count) * tableViewCellHeight
+            resetAnnotations(with: displayedMapItems)
+
+            UIView.animate(withDuration: 0.25) {
+                self.tableView.layoutIfNeeded()
+            } completion: { [weak self] _ in
+                guard let self else { return }
+                
+                dataSourceSnapshot.deleteAllItems()
+                dataSourceSnapshot.appendSections([0])
+                dataSourceSnapshot.appendItems(displayedMapItems)
+                dataSource.apply(dataSourceSnapshot, animatingDifferences: false)
+            }
+        }
+    }
+    private var selectedMapItem: MKMapItem? = nil {
+        didSet {
+            guard selectedMapItem != oldValue else {
+                return
+            }
+            guard let selectedMapItem else {
+                currentLookAroundScene = nil
+                return
+            }
+            print(selectedMapItem.placemark.coordinate)
+            updateCurrentScene(with: selectedMapItem)
+            resetAnnotations(with: [selectedMapItem])
+
+            //            let cameraDistance: CLLocationDistance = {
+            //                let region = selectedItem.placemark.region as? CLCircularRegion
+            //                if let region, region.radius > 200 {
+            //                    return 1000
+            //                }
+            //                return 700
+            //            }()
+
+            let camera = MKMapCamera(
+                lookingAtCenter: selectedMapItem.placemark.coordinate,
+                fromDistance: 1000,//cameraDistance,
+                pitch: 60,
+                heading: 0
+            )
+            mapView.setCamera(camera, animated: true)
+        }
+    }
+
     private let lookAroundViewController = MKLookAroundViewController()
+    private var currentLookAroundScene: MKLookAroundScene? = nil {
+        didSet {
+            guard currentLookAroundScene != oldValue else {
+                return
+            }
+            lookAroundViewController.scene = currentLookAroundScene
+            lookAroundViewController.view.isHidden = currentLookAroundScene == nil
+        }
+    }
+
+    private var currentAnnotations: [MKAnnotation] = []
+
+    private var storedMapItems: [MKMapItem] = []
+    private var currentAttractionIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 32, right: 16)
+
+        setupMapView()
+        setupSearchBar()
+        setupTableView()
+        setupLookAroundViewController()
+        setupDirectionButton()
+
+        searchBar.becomeFirstResponder()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchBar.resignFirstResponder()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        searchBar.searchTextField.layer.cornerRadius = searchBar.searchTextField.frame.height / 2
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -211,17 +200,308 @@ final class ViewController: UIViewController {
 extension ViewController {
 
     private func setupSearchBar() {
+        searchBar = UISearchBar()
+            .add(to: view)
+            .anchor(\.topAnchor, to: view.safeAreaLayoutGuide.topAnchor)
+            .anchor(\.leadingAnchor, to: view.safeAreaLayoutGuide.leadingAnchor)
+            .anchor(\.trailingAnchor, to: view.safeAreaLayoutGuide.trailingAnchor)
+            .anchor(\.heightAnchor, to: 56)
+
+        searchBar
+            .set(\.backgroundImage, with: UIImage())
+            .set(\.delegate, with: self)
+
+        searchBar.searchTextField
+            .set(\.backgroundColor, with: UIColor.systemGray6.withAlphaComponent(0.9))
+            .set(\.attributedPlaceholder, with: NSAttributedString(
+                string: "Write wherever you want to go",
+                attributes: [.foregroundColor: UIColor.systemGray]
+            ))
     }
 
     private func setupTableView() {
+        tableView = UITableView()
+            .add(to: view)
+            .anchor(\.topAnchor, to: searchBar.bottomAnchor)
+            .anchor(\.leadingAnchor, to: view.layoutMarginsGuide.leadingAnchor)
+            .anchor(\.trailingAnchor, to: view.layoutMarginsGuide.trailingAnchor)
+            .anchor(\.bottomAnchor, .lessThanOrEqual, to: view.safeAreaLayoutGuide.bottomAnchor)
+
+        tableViewHeightConstraint = tableView.constraint(
+            \.heightAnchor, to: 0,
+             priority: .defaultHigh
+        )
+
+        tableView
+            .set(\.backgroundColor, with: .clear)
+            .set(\.separatorStyle, with: .none)
+            .set(\.rowHeight, with: tableViewCellHeight)
+            .set(\.estimatedRowHeight, with: tableViewCellHeight)
+            .set(\.showsVerticalScrollIndicator, with: true)
+            .set(\.showsHorizontalScrollIndicator, with: false)
+            .set(\.delegate, with: self)
+            .register(cellType: SuggestedSearchTermCell.self)
+
+        tableView.dataSource = dataSource
     }
 
     private func setupMapView() {
+        mapView = MKMapView()
+            .add(to: view)
+            .anchor(\.topAnchor, to: view.topAnchor)
+            .anchor(\.leadingAnchor, to: view.leadingAnchor)
+            .anchor(\.trailingAnchor, to: view.trailingAnchor)
+            .anchor(\.bottomAnchor, to: view.bottomAnchor)
+        mapView
+            .set(\.showsUserLocation, with: false)
+            .set(\.delegate, with: self)
+        //            .set(\.preferredConfiguration, with: MKStandardMapConfiguration(elevationStyle: .realistic))
+            .set(\.preferredConfiguration, with: MKHybridMapConfiguration(elevationStyle: .realistic))
+
+        mapView.setRegion(.japan, animated: true)
     }
 
     private func setupLookAroundViewController() {
+        lookAroundViewController.view
+            .add(to: view)
+            .anchor(\.topAnchor, to: view.topAnchor, priority: .defaultHigh)
+            .anchor(\.bottomAnchor, to: view.bottomAnchor)
+            .anchor(\.leadingAnchor, to: view.leadingAnchor)
+            .anchor(\.trailingAnchor, to: view.trailingAnchor, priority: .defaultHigh)
+
+        lookAroundViewController.view.constraint(\.heightAnchor, .equal, to: 150)
+        lookAroundViewController.view.constraint(\.widthAnchor, .equal, to: 150)
+
+        addChild(lookAroundViewController)
+        lookAroundViewController.didMove(toParent: self)
+
+        lookAroundViewController.view.isHidden = true
+
+        //        lookAroundViewController.isNavigationEnabled = false
+        lookAroundViewController.delegate = self
     }
 
     private func setupDirectionButton() {
+        directionButton = UIButton()
+            .add(to: view)
+            .anchor(\.bottomAnchor, to: view.safeAreaLayoutGuide.bottomAnchor)
+            .anchor(\.trailingAnchor, to: view.safeAreaLayoutGuide.trailingAnchor)
+            .anchor(\.widthAnchor, to: 56)
+            .anchor(\.heightAnchor, to: 56)
+        directionButton
+            .set(\.layer.cornerRadius, with: 28)
+            .set(\.backgroundColor, with: UIColor.white.withAlphaComponent(0.9))
+            .set(\.tintColor, with: .darkGray)
+        directionButton.setImage(UIImage(systemName: "tram.fill"), for: .normal)
+        directionButton.addTarget(self, action: #selector(directionButtonTapped), for: .touchUpInside)
     }
+
+    private func updateCurrentScene(with item: MKMapItem) {
+        Task { @MainActor in
+            do {
+                self.currentLookAroundScene = try await lookAroundSceneRetriever.fetchScene(with: item)
+            } catch {
+                self.currentLookAroundScene = nil
+            }
+        }
+    }
+
+    private func resetAnnotations(with items: [MKMapItem]) {
+        mapView.removeAnnotations(currentAnnotations)
+        currentAnnotations = items.map { item -> MKPointAnnotation in
+            let annotation = MKPointAnnotation()
+                .set(\.title, with: item.name)
+                .set(\.subtitle, with: item.placemark.title)
+                .set(\.coordinate, with: item.placemark.coordinate)
+            return annotation
+        }
+        mapView.addAnnotations(currentAnnotations)
+    }
+
+    private func retrieveImage(for item: MKMapItem) async -> UIImage? {
+        do {
+            guard let scene = try await lookAroundSceneRetriever.fetchScene(with: item) else {
+                return nil
+            }
+            let image = try await lookAroundSceneRetriever.generateSnapshot(
+                for: scene,
+                with: CGSize(width: 500, height: 500)
+            )
+            return image
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+
+    private func goToNextAttraction() async {
+        let sourceIndex = currentAttractionIndex
+        let destinationIndex = currentAttractionIndex + 1
+        currentAttractionIndex = destinationIndex
+
+        guard
+            destinationIndex < displayedMapItems.count,
+            let sourceItem = storedMapItems[safe: sourceIndex],
+            let destinationItem = storedMapItems[safe: destinationIndex],
+            let route = await routeService.generateRoute(
+                from: sourceItem,
+                to: destinationItem
+            )
+        else {
+            return
+        }
+
+        mapView.addOverlay(route.polyline, level: .aboveRoads)
+        mapView.setVisibleMapRect(route.polyline.boundingMapRect.insetBy(dx: -30, dy: -30), animated: true)
+    }
+
+    @objc
+    private func directionButtonTapped() {
+        switch currentMode {
+        case .direction:
+            if currentAttractionIndex < displayedMapItems.count - 1 {
+                Task { @MainActor in
+                    await goToNextAttraction()
+                }
+            } else {
+                currentMode = .search
+            }
+        case .search:
+            currentAttractionIndex = 0
+            currentMode = .direction
+            Task { @MainActor in
+                await goToNextAttraction()
+            }
+        }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension ViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        Task { @MainActor in
+            if searchText.isEmpty {
+                displayedMapItems = []
+                return
+            }
+
+            let (items, region) = await attractionsSearcher.search(for: searchText, in: .travelPointsOfInterest, in: .japan)
+            guard !items.isEmpty, let region else { return }
+
+            displayedMapItems = items
+            mapView.setRegion(region, animated: true)
+        }
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension ViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = displayedMapItems[indexPath.item]
+        searchBar.text = selectedItem.name
+        searchBar.resignFirstResponder()
+
+        // clear all suggestion and hide the tableView
+        displayedMapItems = []
+        self.selectedMapItem = selectedItem
+    }
+}
+
+// MARK: - MKMapViewDelegate
+extension ViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let view = MKMarkerAnnotationView()
+        view.markerTintColor = .orange
+        view.glyphText = "⚑"
+        view.glyphTintColor = .white
+        view.canShowCallout = true
+        view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        view.leftCalloutAccessoryView = UIButton(type: .contactAdd)
+
+        if let annotation = annotation as? MKMapFeatureAnnotation,
+           let style = annotation.iconStyle {
+            view.glyphText = nil
+            view.glyphImage = style.image
+        }
+
+        if let selectedMapItem, annotation.title == selectedMapItem.name {
+            //            let text = """
+            //             \(String(describing: selectedItem.placemark.title))
+            //             \(String(describing: selectedItem.placemark.subLocality))
+            //             \(String(describing: selectedItem.placemark.subThoroughfare))
+            //             \(String(describing: selectedItem.placemark.subAdministrativeArea))
+            //             \(String(describing: selectedItem.phoneNumber))
+            //             \(String(describing: selectedItem.url))
+            //             \(String(describing: selectedItem.pointOfInterestCategory))
+            //             \(selectedItem.placemark)
+            //             """
+            //            dump(text, name: "🎊")
+            //            print("🫐", text)
+            Task { @MainActor in
+                if let scene = try? await lookAroundSceneRetriever.fetchScene(with: selectedMapItem) {
+                    view.glyphImage = try? await lookAroundSceneRetriever.generateSnapshot(
+                        for: scene,
+                        with: CGSize(width: 50, height: 50)
+                    )
+                }
+            }
+        }
+        return view
+    }
+
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control === view.leftCalloutAccessoryView {
+            print("🐛")
+            guard let selectedMapItem else { return }
+            storedMapItems.append(selectedMapItem)
+            self.selectedMapItem = nil
+        }
+        if control === view.rightCalloutAccessoryView {
+            print("🫐")
+            guard let selectedMapItem else { return }
+            //            Task { @MainActor in
+            let launchOptions: [String : Any] = [
+                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: mapView.region.center),
+                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: mapView.region.span),
+                //                    MKLaunchOptionsMapTypeKey: mapView.
+            ]
+            let result = selectedMapItem.openInMaps(launchOptions: launchOptions)
+            print("✨", result)
+            //            }
+        }
+    }
+
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let overlay = overlay as? MKPolyline else {
+            fatalError("Unexpected overlay \(overlay) added to the map view")
+        }
+
+        let renderer = MKPolylineRenderer(polyline: overlay)
+        renderer.strokeColor = .purple
+        renderer.lineWidth = 6
+
+        return renderer
+    }
+}
+
+// MARK: - MKLookAroundViewControllerDelegate
+extension ViewController: MKLookAroundViewControllerDelegate {
+
 }
