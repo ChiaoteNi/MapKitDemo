@@ -32,7 +32,8 @@ actor RouteService {
     func generateRoute(
         from sourceItem: MKMapItem,
         to destinationItem: MKMapItem,
-        transportType: MKDirectionsTransportType = .automobile,
+        // The transit transportType only supported for ETA calculations since iOS 9
+        transportType: MKDirectionsTransportType = .any,
         tollPreference: MKDirections.RoutePreference = .any,
         highwayPreference: MKDirections.RoutePreference = .any
     ) async -> MKRoute? {
@@ -41,6 +42,8 @@ actor RouteService {
         request.source = sourceItem
         request.destination = destinationItem
         request.transportType = transportType
+        request.requestsAlternateRoutes = true
+        request.departureDate = Date()
         request.tollPreference = tollPreference
         request.highwayPreference = highwayPreference
 
@@ -52,14 +55,14 @@ actor RouteService {
         let direction = MKDirections(request: request)
         do {
             let response = try await direction.calculate()
-            //        let expectedTravelTime = await direction.calculateETA()
+//            let expectedTravelTime = try? await direction.calculateETA()
 
             if let route = response.routes.first {
                 cachedRoute[hash] = route
                 return route
             }
         } catch {
-            dump(error, name: "🐛")
+            dump(error, name: "🐛") // You will get a code 5 error when you try to get response with the transit transportType
         }
         return nil
     }
