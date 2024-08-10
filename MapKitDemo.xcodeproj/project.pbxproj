@@ -11,9 +11,6 @@
 		932446F62A2CCBD100A40BDB /* MapKitDemoStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932446F32A2CCBD100A40BDB /* MapKitDemoStateStore.swift */; };
 		932446F72A2CCBD100A40BDB /* MapKitDemoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932446F42A2CCBD100A40BDB /* MapKitDemoInteractor.swift */; };
 		932446F92A2CCDF700A40BDB /* Publisher + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932446F82A2CCDF700A40BDB /* Publisher + Extensions.swift */; };
-		93456EF52A22D912005A410C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456EF42A22D912005A410C /* AppDelegate.swift */; };
-		93456EF72A22D912005A410C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456EF62A22D912005A410C /* SceneDelegate.swift */; };
-		93456EFC2A22D912005A410C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93456EFA2A22D912005A410C /* Main.storyboard */; };
 		93456EFE2A22D912005A410C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93456EFD2A22D912005A410C /* Assets.xcassets */; };
 		93456F012A22D912005A410C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93456EFF2A22D912005A410C /* LaunchScreen.storyboard */; };
 		93456F0C2A22D913005A410C /* MapKitDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F0B2A22D913005A410C /* MapKitDemoTests.swift */; };
@@ -30,6 +27,8 @@
 		93456F392A234455005A410C /* LookAroundSceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F382A234455005A410C /* LookAroundSceneService.swift */; };
 		93456F3B2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F3A2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift */; };
 		93456F3D2A250D57005A410C /* RouteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F3C2A250D57005A410C /* RouteService.swift */; };
+		93AFB1CD2C67262A00A11939 /* MapKitDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */; };
+		93AFB1D02C6726FD00A11939 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1CF2C6726FD00A11939 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,9 +54,6 @@
 		932446F42A2CCBD100A40BDB /* MapKitDemoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapKitDemoInteractor.swift; sourceTree = "<group>"; };
 		932446F82A2CCDF700A40BDB /* Publisher + Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher + Extensions.swift"; sourceTree = "<group>"; };
 		93456EF12A22D912005A410C /* MapKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		93456EF42A22D912005A410C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		93456EF62A22D912005A410C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		93456EFB2A22D912005A410C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		93456EFD2A22D912005A410C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93456F002A22D912005A410C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93456F022A22D912005A410C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +73,8 @@
 		93456F382A234455005A410C /* LookAroundSceneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundSceneService.swift; sourceTree = "<group>"; };
 		93456F3A2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion + Extensions.swift"; sourceTree = "<group>"; };
 		93456F3C2A250D57005A410C /* RouteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteService.swift; sourceTree = "<group>"; };
+		93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitDemoApp.swift; sourceTree = "<group>"; };
+		93AFB1CF2C6726FD00A11939 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +125,7 @@
 		93456EF32A22D912005A410C /* MapKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				93456EF42A22D912005A410C /* AppDelegate.swift */,
-				93456EF62A22D912005A410C /* SceneDelegate.swift */,
+				93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */,
 				93456F252A22F435005A410C /* UIs */,
 				93456F2D2A22FC21005A410C /* Utils */,
 				93456F242A22F423005A410C /* Extensions */,
@@ -170,10 +167,8 @@
 		93456F252A22F435005A410C /* UIs */ = {
 			isa = PBXGroup;
 			children = (
-				932446F22A2CCBD100A40BDB /* MapKitDemoViewController.swift */,
-				932446F42A2CCBD100A40BDB /* MapKitDemoInteractor.swift */,
-				932446F32A2CCBD100A40BDB /* MapKitDemoStateStore.swift */,
-				93456F362A2338A7005A410C /* SuggestedSearchTermCell.swift */,
+				93AFB1CF2C6726FD00A11939 /* ContentView.swift */,
+				93AFB1CE2C6726DE00A11939 /* UIKit */,
 			);
 			path = UIs;
 			sourceTree = "<group>";
@@ -181,7 +176,6 @@
 		93456F262A22F45F005A410C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				93456EFA2A22D912005A410C /* Main.storyboard */,
 				93456EFD2A22D912005A410C /* Assets.xcassets */,
 				93456EFF2A22D912005A410C /* LaunchScreen.storyboard */,
 			);
@@ -199,6 +193,17 @@
 				93456F322A230AA9005A410C /* Error.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		93AFB1CE2C6726DE00A11939 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				932446F22A2CCBD100A40BDB /* MapKitDemoViewController.swift */,
+				932446F42A2CCBD100A40BDB /* MapKitDemoInteractor.swift */,
+				932446F32A2CCBD100A40BDB /* MapKitDemoStateStore.swift */,
+				93456F362A2338A7005A410C /* SuggestedSearchTermCell.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,7 +312,6 @@
 			files = (
 				93456F012A22D912005A410C /* LaunchScreen.storyboard in Resources */,
 				93456EFE2A22D912005A410C /* Assets.xcassets in Resources */,
-				93456EFC2A22D912005A410C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,19 +338,19 @@
 			files = (
 				932446F52A2CCBD100A40BDB /* MapKitDemoViewController.swift in Sources */,
 				93456F2A2A22F5A2005A410C /* Array + SafetyAccess.swift in Sources */,
+				93AFB1CD2C67262A00A11939 /* MapKitDemoApp.swift in Sources */,
 				93456F372A2338A7005A410C /* SuggestedSearchTermCell.swift in Sources */,
 				93456F2F2A23016A005A410C /* AttractionsSearcher.swift in Sources */,
 				93456F352A232612005A410C /* UITableView + Extension.swift in Sources */,
 				932446F72A2CCBD100A40BDB /* MapKitDemoInteractor.swift in Sources */,
 				93456F3D2A250D57005A410C /* RouteService.swift in Sources */,
+				93AFB1D02C6726FD00A11939 /* ContentView.swift in Sources */,
 				932446F92A2CCDF700A40BDB /* Publisher + Extensions.swift in Sources */,
 				93456F2B2A22F5A2005A410C /* NSObject + Builder.swift in Sources */,
 				93456F2C2A22F5A2005A410C /* UIView + Constraints.swift in Sources */,
 				93456F312A23086E005A410C /* MKPointOfInterestCategory + Extensions.swift in Sources */,
-				93456EF52A22D912005A410C /* AppDelegate.swift in Sources */,
 				93456F392A234455005A410C /* LookAroundSceneService.swift in Sources */,
 				93456F332A230AA9005A410C /* Error.swift in Sources */,
-				93456EF72A22D912005A410C /* SceneDelegate.swift in Sources */,
 				932446F62A2CCBD100A40BDB /* MapKitDemoStateStore.swift in Sources */,
 				93456F3B2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift in Sources */,
 			);
@@ -385,14 +389,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		93456EFA2A22D912005A410C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				93456EFB2A22D912005A410C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		93456EFF2A22D912005A410C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -527,12 +523,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7Y4TPNE48W;
 				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_FLATTEN_NIBS = NO;
 				INFOPLIST_FILE = MapKitDemo/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To display for nearby locations, PointsOfInterest needs access to the user's location when running.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -555,12 +553,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7Y4TPNE48W;
 				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_FLATTEN_NIBS = NO;
 				INFOPLIST_FILE = MapKitDemo/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To display for nearby locations, PointsOfInterest needs access to the user's location when running.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
