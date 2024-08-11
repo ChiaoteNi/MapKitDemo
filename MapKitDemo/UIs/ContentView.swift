@@ -12,9 +12,16 @@ struct ContentView: View {
         NavigationStack {
             Spacer()
             NavigationLink("UIKit Demo") {
-                UIKitDemoView().edgesIgnoringSafeArea(.all)
+                UIKitDemoView()
+                    .edgesIgnoringSafeArea(.all)
             }
             Spacer()
+            if #available(iOS 18.0, *) {
+                NavigationLink("MapItem detail view & MapItem ID") {
+                    MapItemDetailDemoView()
+                }
+                Spacer()
+            }
         }
     }
 }

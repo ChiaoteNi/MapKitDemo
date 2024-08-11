@@ -30,6 +30,7 @@
 		935622E42C68778C005189EA /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935622E32C68778C005189EA /* BackButton.swift */; };
 		93AFB1CD2C67262A00A11939 /* MapKitDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */; };
 		93AFB1D02C6726FD00A11939 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1CF2C6726FD00A11939 /* ContentView.swift */; };
+		93AFB1D72C67792500A11939 /* MapItemDetailDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1D62C67792500A11939 /* MapItemDetailDemoView.swift */; };
 		93AFB1D92C67820D00A11939 /* Async + Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1D82C67820C00A11939 /* Async + Sequence.swift */; };
 		93E91BD82C68AF07000ED8A9 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E91BD72C68AF07000ED8A9 /* CommonButton.swift */; };
 		93E91BDA2C68B6EB000ED8A9 /* CommonButtonStyleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E91BD92C68B6EB000ED8A9 /* CommonButtonStyleModifier.swift */; };
@@ -82,6 +83,7 @@
 		935622E32C68778C005189EA /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitDemoApp.swift; sourceTree = "<group>"; };
 		93AFB1CF2C6726FD00A11939 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		93AFB1D62C67792500A11939 /* MapItemDetailDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItemDetailDemoView.swift; sourceTree = "<group>"; };
 		93AFB1D82C67820C00A11939 /* Async + Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Async + Sequence.swift"; sourceTree = "<group>"; };
 		93E91BD72C68AF07000ED8A9 /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		93E91BD92C68B6EB000ED8A9 /* CommonButtonStyleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButtonStyleModifier.swift; sourceTree = "<group>"; };
@@ -209,6 +211,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		935622E72C688296005189EA /* Demos */ = {
+			isa = PBXGroup;
+			children = (
+				93AFB1D62C67792500A11939 /* MapItemDetailDemoView.swift */,
+			);
+			path = Demos;
+			sourceTree = "<group>";
+		};
 		935622E92C68835C005189EA /* Utility Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +253,7 @@
 		93AFB1D42C6778A700A11939 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				935622E72C688296005189EA /* Demos */,
 				935622E92C68835C005189EA /* Utility Components */,
 			);
 			path = SwiftUI;
@@ -387,6 +398,7 @@
 				935622E42C68778C005189EA /* BackButton.swift in Sources */,
 				93456F2F2A23016A005A410C /* AttractionsSearcher.swift in Sources */,
 				93456F352A232612005A410C /* UITableView + Extension.swift in Sources */,
+				93AFB1D72C67792500A11939 /* MapItemDetailDemoView.swift in Sources */,
 				93E91BD82C68AF07000ED8A9 /* CommonButton.swift in Sources */,
 				932446F72A2CCBD100A40BDB /* MapKitDemoInteractor.swift in Sources */,
 				93456F3D2A250D57005A410C /* RouteService.swift in Sources */,
