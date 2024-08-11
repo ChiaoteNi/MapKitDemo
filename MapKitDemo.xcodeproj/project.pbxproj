@@ -27,8 +27,14 @@
 		93456F392A234455005A410C /* LookAroundSceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F382A234455005A410C /* LookAroundSceneService.swift */; };
 		93456F3B2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F3A2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift */; };
 		93456F3D2A250D57005A410C /* RouteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F3C2A250D57005A410C /* RouteService.swift */; };
+		935622E42C68778C005189EA /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935622E32C68778C005189EA /* BackButton.swift */; };
 		93AFB1CD2C67262A00A11939 /* MapKitDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */; };
 		93AFB1D02C6726FD00A11939 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1CF2C6726FD00A11939 /* ContentView.swift */; };
+		93AFB1D92C67820D00A11939 /* Async + Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1D82C67820C00A11939 /* Async + Sequence.swift */; };
+		93E91BD82C68AF07000ED8A9 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E91BD72C68AF07000ED8A9 /* CommonButton.swift */; };
+		93E91BDA2C68B6EB000ED8A9 /* CommonButtonStyleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E91BD92C68B6EB000ED8A9 /* CommonButtonStyleModifier.swift */; };
+		93EE05942C67BE7E00E35242 /* MapItemOptionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE05932C67BE7E00E35242 /* MapItemOptionButtons.swift */; };
+		93FB6C982C6885BE00AD1DB5 /* NavigationBarHiddenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FB6C972C6885BE00AD1DB5 /* NavigationBarHiddenModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,8 +79,14 @@
 		93456F382A234455005A410C /* LookAroundSceneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundSceneService.swift; sourceTree = "<group>"; };
 		93456F3A2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion + Extensions.swift"; sourceTree = "<group>"; };
 		93456F3C2A250D57005A410C /* RouteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteService.swift; sourceTree = "<group>"; };
+		935622E32C68778C005189EA /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitDemoApp.swift; sourceTree = "<group>"; };
 		93AFB1CF2C6726FD00A11939 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		93AFB1D82C67820C00A11939 /* Async + Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Async + Sequence.swift"; sourceTree = "<group>"; };
+		93E91BD72C68AF07000ED8A9 /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
+		93E91BD92C68B6EB000ED8A9 /* CommonButtonStyleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButtonStyleModifier.swift; sourceTree = "<group>"; };
+		93EE05932C67BE7E00E35242 /* MapItemOptionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItemOptionButtons.swift; sourceTree = "<group>"; };
+		93FB6C972C6885BE00AD1DB5 /* NavigationBarHiddenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationBarHiddenModifier.swift; path = "MapKitDemo/UIs/SwiftUI/Utility Components/NavigationBarHiddenModifier.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				932446F82A2CCDF700A40BDB /* Publisher + Extensions.swift */,
+				93AFB1D82C67820C00A11939 /* Async + Sequence.swift */,
 				93456F272A22F5A2005A410C /* Array + SafetyAccess.swift */,
 				93456F282A22F5A2005A410C /* NSObject + Builder.swift */,
 				93456F292A22F5A2005A410C /* UIView + Constraints.swift */,
@@ -168,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				93AFB1CF2C6726FD00A11939 /* ContentView.swift */,
+				93AFB1D42C6778A700A11939 /* SwiftUI */,
 				93AFB1CE2C6726DE00A11939 /* UIKit */,
 			);
 			path = UIs;
@@ -195,6 +209,26 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		935622E92C68835C005189EA /* Utility Components */ = {
+			isa = PBXGroup;
+			children = (
+				935622EA2C68838F005189EA /* ViewModifier */,
+				93EE05932C67BE7E00E35242 /* MapItemOptionButtons.swift */,
+				935622E32C68778C005189EA /* BackButton.swift */,
+				93E91BD72C68AF07000ED8A9 /* CommonButton.swift */,
+			);
+			path = "Utility Components";
+			sourceTree = "<group>";
+		};
+		935622EA2C68838F005189EA /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				93FB6C972C6885BE00AD1DB5 /* NavigationBarHiddenModifier.swift */,
+				93E91BD92C68B6EB000ED8A9 /* CommonButtonStyleModifier.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
 		93AFB1CE2C6726DE00A11939 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +238,14 @@
 				93456F362A2338A7005A410C /* SuggestedSearchTermCell.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		93AFB1D42C6778A700A11939 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				935622E92C68835C005189EA /* Utility Components */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,16 +381,22 @@
 				932446F52A2CCBD100A40BDB /* MapKitDemoViewController.swift in Sources */,
 				93456F2A2A22F5A2005A410C /* Array + SafetyAccess.swift in Sources */,
 				93AFB1CD2C67262A00A11939 /* MapKitDemoApp.swift in Sources */,
+				93E91BDA2C68B6EB000ED8A9 /* CommonButtonStyleModifier.swift in Sources */,
 				93456F372A2338A7005A410C /* SuggestedSearchTermCell.swift in Sources */,
+				93AFB1D92C67820D00A11939 /* Async + Sequence.swift in Sources */,
+				935622E42C68778C005189EA /* BackButton.swift in Sources */,
 				93456F2F2A23016A005A410C /* AttractionsSearcher.swift in Sources */,
 				93456F352A232612005A410C /* UITableView + Extension.swift in Sources */,
+				93E91BD82C68AF07000ED8A9 /* CommonButton.swift in Sources */,
 				932446F72A2CCBD100A40BDB /* MapKitDemoInteractor.swift in Sources */,
 				93456F3D2A250D57005A410C /* RouteService.swift in Sources */,
+				93EE05942C67BE7E00E35242 /* MapItemOptionButtons.swift in Sources */,
 				93AFB1D02C6726FD00A11939 /* ContentView.swift in Sources */,
 				932446F92A2CCDF700A40BDB /* Publisher + Extensions.swift in Sources */,
 				93456F2B2A22F5A2005A410C /* NSObject + Builder.swift in Sources */,
 				93456F2C2A22F5A2005A410C /* UIView + Constraints.swift in Sources */,
 				93456F312A23086E005A410C /* MKPointOfInterestCategory + Extensions.swift in Sources */,
+				93FB6C982C6885BE00AD1DB5 /* NavigationBarHiddenModifier.swift in Sources */,
 				93456F392A234455005A410C /* LookAroundSceneService.swift in Sources */,
 				93456F332A230AA9005A410C /* Error.swift in Sources */,
 				932446F62A2CCBD100A40BDB /* MapKitDemoStateStore.swift in Sources */,
