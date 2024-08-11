@@ -17,7 +17,11 @@ struct ContentView: View {
             }
             Spacer()
             if #available(iOS 18.0, *) {
-                NavigationLink("MapItem detail view & MapItem ID") {
+                NavigationLink("MapItem ID") {
+                    MapItemIdentifierDemoView()
+                }
+                Spacer()
+                NavigationLink("MapItem detail view") {
                     MapItemDetailDemoView()
                 }
                 Spacer()
