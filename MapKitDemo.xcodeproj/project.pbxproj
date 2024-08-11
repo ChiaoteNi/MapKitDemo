@@ -28,6 +28,7 @@
 		93456F3B2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F3A2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift */; };
 		93456F3D2A250D57005A410C /* RouteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93456F3C2A250D57005A410C /* RouteService.swift */; };
 		935622E42C68778C005189EA /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935622E32C68778C005189EA /* BackButton.swift */; };
+		935622E62C6881C4005189EA /* SpotAreaDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935622E52C6881C4005189EA /* SpotAreaDemoView.swift */; };
 		93AFB1CD2C67262A00A11939 /* MapKitDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */; };
 		93AFB1D02C6726FD00A11939 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1CF2C6726FD00A11939 /* ContentView.swift */; };
 		93AFB1D72C67792500A11939 /* MapItemDetailDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AFB1D62C67792500A11939 /* MapItemDetailDemoView.swift */; };
@@ -81,6 +82,7 @@
 		93456F3A2A23A67C005A410C /* MKCoordinateRegion + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion + Extensions.swift"; sourceTree = "<group>"; };
 		93456F3C2A250D57005A410C /* RouteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteService.swift; sourceTree = "<group>"; };
 		935622E32C68778C005189EA /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		935622E52C6881C4005189EA /* SpotAreaDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpotAreaDemoView.swift; path = MapKitDemo/UIs/SwiftUI/Demos/SpotAreaDemoView.swift; sourceTree = SOURCE_ROOT; };
 		93AFB1CC2C67262A00A11939 /* MapKitDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitDemoApp.swift; sourceTree = "<group>"; };
 		93AFB1CF2C6726FD00A11939 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		93AFB1D62C67792500A11939 /* MapItemDetailDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItemDetailDemoView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				93AFB1D62C67792500A11939 /* MapItemDetailDemoView.swift */,
+				935622E52C6881C4005189EA /* SpotAreaDemoView.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				935622E62C6881C4005189EA /* SpotAreaDemoView.swift in Sources */,
 				932446F52A2CCBD100A40BDB /* MapKitDemoViewController.swift in Sources */,
 				93456F2A2A22F5A2005A410C /* Array + SafetyAccess.swift in Sources */,
 				93AFB1CD2C67262A00A11939 /* MapKitDemoApp.swift in Sources */,

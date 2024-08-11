@@ -22,6 +22,12 @@ struct ContentView: View {
                 }
                 Spacer()
             }
+            if #available(iOS 17.0, *) {
+                NavigationLink("Overlays for the map") {
+                    SpotAreaDemoView()
+                }
+                Spacer()
+            }
         }
     }
 }
