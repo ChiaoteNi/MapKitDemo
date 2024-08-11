@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9311678B2C68D6DB0056A8D9 /* RouteDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9311678A2C68D6DB0056A8D9 /* RouteDemoView.swift */; };
 		932446F52A2CCBD100A40BDB /* MapKitDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932446F22A2CCBD100A40BDB /* MapKitDemoViewController.swift */; };
 		932446F62A2CCBD100A40BDB /* MapKitDemoStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932446F32A2CCBD100A40BDB /* MapKitDemoStateStore.swift */; };
 		932446F72A2CCBD100A40BDB /* MapKitDemoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932446F42A2CCBD100A40BDB /* MapKitDemoInteractor.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9311678A2C68D6DB0056A8D9 /* RouteDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDemoView.swift; sourceTree = "<group>"; };
 		932446F22A2CCBD100A40BDB /* MapKitDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapKitDemoViewController.swift; sourceTree = "<group>"; };
 		932446F32A2CCBD100A40BDB /* MapKitDemoStateStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapKitDemoStateStore.swift; sourceTree = "<group>"; };
 		932446F42A2CCBD100A40BDB /* MapKitDemoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapKitDemoInteractor.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				93AFB1D62C67792500A11939 /* MapItemDetailDemoView.swift */,
 				935622E52C6881C4005189EA /* SpotAreaDemoView.swift */,
+				9311678A2C68D6DB0056A8D9 /* RouteDemoView.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				93456F2B2A22F5A2005A410C /* NSObject + Builder.swift in Sources */,
 				93456F2C2A22F5A2005A410C /* UIView + Constraints.swift in Sources */,
 				93456F312A23086E005A410C /* MKPointOfInterestCategory + Extensions.swift in Sources */,
+				9311678B2C68D6DB0056A8D9 /* RouteDemoView.swift in Sources */,
 				93FB6C982C6885BE00AD1DB5 /* NavigationBarHiddenModifier.swift in Sources */,
 				93456F392A234455005A410C /* LookAroundSceneService.swift in Sources */,
 				93456F332A230AA9005A410C /* Error.swift in Sources */,

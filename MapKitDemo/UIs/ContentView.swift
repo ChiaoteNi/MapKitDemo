@@ -27,6 +27,10 @@ struct ContentView: View {
                     SpotAreaDemoView()
                 }
                 Spacer()
+                NavigationLink("Routes") {
+                    RouteDemoView()
+                }
+                Spacer()
             }
         }
     }
